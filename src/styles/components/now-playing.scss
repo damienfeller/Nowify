@@ -9,68 +9,82 @@
   // background-color: black;
   // color: var(--color-text-primary);
   color:  rgb(240, 240, 240);
-  display: flex;
-  flex-flow: row nowrap;
-  height: 100%;
-  // padding: var(--spacing-m);
-  padding: 0%;
-  margin: 0%;
-  width: 100%;
+display: flex;
+  /* Switch from row to column so the cover is stacked above details. */
+  flex-direction: column;
 
+  /* 
+   * This ensures the container fills the full screen
+   * in a vertical 9:16 setup.
+   */
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+
+  /* Space out the album art (top) and details (bottom). */
+  align-items: center;
+  justify-content: space-between;
+
+  // Cover and Details each can be a "section".
   &__cover,
   &__details {
-    padding: var(--spacing-l);
-    text-align: left;
-    width: 50%;
-    max-width: 960px;
+    width: 100%;
+    /* Center contents horizontally if desired: */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &__cover {
-    max-width: 900px;
-    padding: 0%;
+    /*
+     * The album art container is at the top. 
+     * You can control the exact height or flex behavior here:
+     */
+    flex: 1 1 auto;
+    padding: 1rem;
   }
 
   &__image {
-    box-shadow: 1px 1px 16px -2px rgba(0, 0, 0, .3);
-    // height: auto;
-    height: 100%;
-    width: 100%;
-    object-fit: fill;
-    // max-width: 60vw;
-    // width: 100%;
+    /* 
+     * For portrait screens, you might not want the album 
+     * to be too large. Adjust as needed:
+     */
+    max-height: 70vh; 
+    width: auto;
+    height: auto; 
+    object-fit: contain;
+
+    box-shadow: 1px 1px 16px -2px rgba(0, 0, 0, 0.3);
   }
 
   &__details {
-    text-align: left;
+    flex: 0 0 auto;
+    padding: 1rem;
+    text-align: center; /* Center text horizontally */
   }
 
   &__track {
-    font-weight: var(--font-weight-heading);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
   }
 
   &__artists {
+    font-size: 1.2rem;
     opacity: 0.8;
   }
 
+  /* The idle & active states can remain if you want. */
   &--active {
-    align-items: center;
-    justify-content: center;
+    /* Possibly override any previous settings if needed. */
   }
 
   &--idle {
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    justify-content: center;
-    background-color: black;
-    width: 100%;
+    /* Possibly override any previous settings if needed. */
   }
 
   &__idle-heading {
-    width: 100%;
+    /* Adjust idle heading style, if used. */
     text-align: center;
-    justify-content: center;
-  
   }
-
 }
