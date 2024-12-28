@@ -1,90 +1,58 @@
-/**
- * Component: Now Playing.
- * -----------------------------------------------------------------------------
- * Styles for the 'Now Playing' screen.
- *
- */
 .now-playing {
-  background-color: var(--colour-background-now-playing);
-  // background-color: black;
-  // color: var(--color-text-primary);
-  color:  rgb(240, 240, 240);
-display: flex;
-  /* Switch from row to column so the cover is stacked above details. */
+  display: flex;
   flex-direction: column;
-
-  /* 
-   * This ensures the container fills the full screen
-   * in a vertical 9:16 setup.
-   */
-  height: 100vh;
-  width: 100vw;
+  align-items: center;     /* Center horizontally */
+  justify-content: space-between; 
+  height: 100vh;          /* Fill the full viewport height */
+  width: 100vw;           /* Fill the full viewport width */
   margin: 0;
   padding: 0;
+  
+  background-color: var(--colour-background-now-playing, black);
+  color: var(--color-text-primary, white);
 
-  /* Space out the album art (top) and details (bottom). */
-  align-items: center;
-  justify-content: space-between;
-
-  // Cover and Details each can be a "section".
-  &__cover,
-  &__details {
-    width: 100%;
-    /* Center contents horizontally if desired: */
+  &__cover {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  &__cover {
-    /*
-     * The album art container is at the top. 
-     * You can control the exact height or flex behavior here:
+    padding: 1rem;
+    /* 
+     * We can let the cover expand or shrink while staying in proportion.
+     * If you want it to take up a certain portion of the screen, 
+     * consider flex-grow: 1 or a fixed height.
      */
     flex: 1 1 auto;
-    padding: 1rem;
+    width: 100%;
   }
 
   &__image {
-    /* 
-     * For portrait screens, you might not want the album 
-     * to be too large. Adjust as needed:
-     */
-    max-height: 70vh; 
-    width: auto;
-    height: auto; 
-    object-fit: contain;
-
+    /* Scale the album art responsively so it doesn’t overflow on small screens */
+    max-width: 80%;       /* 80% of the container’s width */
+    height: auto;         /* Maintain aspect ratio */
+    object-fit: contain; 
     box-shadow: 1px 1px 16px -2px rgba(0, 0, 0, 0.3);
   }
 
   &__details {
-    flex: 0 0 auto;
+    text-align: center;
+    width: 100%;
     padding: 1rem;
-    text-align: center; /* Center text horizontally */
+    /* This ensures the text is below the image. */
+    flex: 0 0 auto;
   }
 
   &__track {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+    /* Title text */
+    display: block; 
+    font-size: 6vw; /* A percentage of the viewport width */
+    margin-bottom: 0.5em;
   }
 
   &__artists {
-    font-size: 1.2rem;
+    /* Artist text below the track title */
+    display: block; 
+    font-size: 4vw; /* Slightly smaller than the title */
     opacity: 0.8;
-  }
-
-  /* The idle & active states can remain if you want. */
-  &--active {
-    /* Possibly override any previous settings if needed. */
-  }
-
-  &--idle {
-    /* Possibly override any previous settings if needed. */
-  }
-
-  &__idle-heading {
-    /* Adjust idle heading style, if used. */
-    text-align: center;
+    margin-bottom: 0.5em;
   }
 }
