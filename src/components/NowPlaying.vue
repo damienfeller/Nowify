@@ -146,12 +146,9 @@ export default {
         .quality(1)
         .clearFilters()
         .getPalette()
-        .then((palette) => {
-          // pick random swatch
-          const albumColours = Object.keys(palette).map((key) => ({
-            text: palette[key].getTitleTextColor(),
-            background: palette[key].getHex()
-          }))
+        .then(palette => {
+          this.handleAlbumPalette(palette)
+        })
       
           this.colourPalette =
             albumColours[Math.floor(Math.random() * albumColours.length)]
