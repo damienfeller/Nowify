@@ -36,7 +36,7 @@ body {
   /* 5) Use flex layout in a column direction to stack cover THEN details vertically. */
   display: flex;
   flex-direction: column;
-  background-color: var(--colour-background-now-playing); /* From Vibrant, fallback optional */
+  background-color: black; /* From Vibrant, fallback optional */
 
   &__cover {
     /* The top half (or portion) of the rotated screen for the album art */
@@ -58,7 +58,7 @@ body {
     /* The bottom half (or portion) of the rotated screen for text */
     flex: 1;
     padding: 2rem;
-    color: var(--color-text-primary);
+    color: rgb(240, 240, 240);
     display: flex;
     flex-direction: column;
     justify-content: center; /* center text vertically in its own box */
