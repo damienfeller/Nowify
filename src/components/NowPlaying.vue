@@ -149,20 +149,6 @@ export default {
         .then(palette => {
           this.handleAlbumPalette(palette)
         })
-      
-          this.colourPalette =
-            albumColours[Math.floor(Math.random() * albumColours.length)]
-          
-          // Now apply that color to your CSS variables:
-          document.documentElement.style.setProperty(
-            '--colour-background-now-playing',
-            this.colourPalette.background
-          )
-          document.documentElement.style.setProperty(
-            '--color-text-primary',
-            this.colourPalette.text
-          )
-        })
     },
 
     /**
