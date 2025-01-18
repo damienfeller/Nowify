@@ -1,14 +1,40 @@
-.now-playing {
-  display: flex;              // place .__cover and .__details side by side
-  flex-flow: row nowrap;
-  height: 100vh;              // fill the entire viewport height
-  width: 100vw;               // fill the entire viewport width
+/* -----------------------------------
+ * SCSS snippet for 90° anti-clockwise rotation
+ * ensuring the layout still fills the screen.
+ * Copy & Paste this into your now-playing.scss
+ * ----------------------------------- */
+html,
+body {
   margin: 0;
   padding: 0;
-  background-color: var(--colour-background-now-playing);    // fallback background if needed
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; /* Prevent scrollbars if the rotated content spills outside */
+}
+
+.now-playing {
+  /* Position absolute so we can swap width/height and translate the element properly. */
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  /* After rotating -90°, width becomes “height” in visual space and vice versa. */
+  width: 100vh; /* swapped from 100vw */
+  height: 100vw; /* swapped from 100vh */
+
+  /* Pivot from the top-left corner, rotate 90° anti-clockwise, then translate to bring it on-screen. */
+  transform-origin: top left;
+  transform: rotate(-90deg) translateX(-100vh);
+
+  /* Normal layout rules (flex, background, etc.) */
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 0;
+  padding: 0;
+  background-color: var(--colour-background-now-playing); // fallback background if needed
 
   &__cover {
-    flex: 1;                  // take up half (or however much) of the container
+    flex: 1; // take up half (or however much) of the container
     display: flex;
     align-items: center;      // center image vertically
     justify-content: center;  // center image horizontally
@@ -18,14 +44,14 @@
   &__image {
     width: auto;
     height: 100%;             // fill the full vertical space
-    object-fit: cover;        // or `contain` if you prefer not to crop
+    object-fit: cover;        // or contain if you prefer not to crop
     display: block;
-    box-shadow: 1px 1px 16px -2px rgba(0, 0, 0, .3);
+    box-shadow: 1px 1px 16px -2px rgba(0, 0, 0, 0.3);
   }
 
   &__details {
-    flex: 1;                  // the other half of the screen
-    padding: 2rem;            // adjust as needed
+    flex: 1;                   // the other half of the screen
+    padding: 2rem;             // adjust as needed
     color: var(--color-text-primary);
     display: flex;
     flex-direction: column;
@@ -43,7 +69,7 @@
     opacity: 0.8;
   }
 
-  // Active / Idle classes
+  // Active / Idle states
   &--active {
     /* styling for active state if needed */
   }
