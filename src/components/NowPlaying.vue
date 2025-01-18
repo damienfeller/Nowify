@@ -146,9 +146,27 @@ export default {
         .quality(1)
         .clearFilters()
         .getPalette()
-        .then(palette => {
-          this.handleAlbumPalette(palette)
+        .then((palette) => {
+          // pick random swatch
+          const albumColours = Object.keys(palette).map((key) => ({
+            text: palette[key].getTitleTextColor(),
+            background: palette[key].getHex()
+          }))
+      
+          this.colourPalette =
+            albumColours[Math.floor(Math.random() * albumColours.length)]
+          
+          // Now apply that color to your CSS variables:
+          document.documentElement.style.setProperty(
+            '--colour-background-now-playing',
+            this.colourPalette.background
+          )
+          document.documentElement.style.setProperty(
+            '--color-text-primary',
+            this.colourPalette.text
+          )
         })
+
     },
 
     /**
