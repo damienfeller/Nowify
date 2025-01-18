@@ -22,7 +22,7 @@
   --colour-text-secondary: #000;
   --color-brand-spotify: #4e8260;
 
-  --font-size-base: 60px;
+  --font-size: clamp(1.8rem, 5vw, 3rem);
 
   --font-body: 'Roboto', 'Source Sans Pro', Helvetica, Arial, sans-serif;
   --font-weight-body: 400;
