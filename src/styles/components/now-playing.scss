@@ -1,17 +1,45 @@
+/* -----------------------------------------
+ * SCSS snippet for 90° anti-clockwise rotation
+ * with the text below the image (stacked).
+ * Copy & Paste into your now-playing.scss
+ * ----------------------------------------- */
+
+/* 1) Make sure our HTML/body fill the screen and avoid scrollbars */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; /* Hides any off-screen overflow after rotation */
+}
+
 .now-playing {
-  /* existing rotation/transforms, etc. */
+  /* 2) Position absolutely so we can swap width/height and translate properly */
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vh;
+
+  /*
+    3) Swap width/height, because once we rotate -90°, the element's 'visual width'
+       is its original height, and vice versa.
+  */
+  width: 100vh; 
   height: 100vw;
+
+  /* 4) Pivot from the top-left corner and rotate the container -90°. 
+     Then translate so it remains within the visible area.
+  */
   transform-origin: top left;
   transform: rotate(-90deg) translateX(-100vh);
+
+  /* 5) Use flex layout in a column direction to stack cover THEN details vertically. */
   display: flex;
-  flex-flow: row nowrap;
-  background-color: var(--colour-background-now-playing);
+  flex-direction: column;
+  background-color: var(--colour-background-now-playing); /* From Vibrant, fallback optional */
 
   &__cover {
+    /* The top half (or portion) of the rotated screen for the album art */
     flex: 1;
     display: flex;
     align-items: center;
@@ -19,24 +47,22 @@
   }
 
   &__image {
-    /* 
-      Use max-width / max-height with object-fit: contain 
-      so the entire cover is visible without cropping.
-    */
+    /* Make sure the entire cover is visible without cropping */
     max-width: 100%;
     max-height: 100%;
-    object-fit: contain;
-    display: block;
+    object-fit: contain; /* 'cover' would crop the sides; 'contain' keeps full image */
     box-shadow: 1px 1px 16px -2px rgba(0, 0, 0, 0.3);
   }
 
   &__details {
+    /* The bottom half (or portion) of the rotated screen for text */
     flex: 1;
     padding: 2rem;
     color: var(--color-text-primary);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center; /* center text vertically in its own box */
+    align-items: center;     /* center text horizontally if desired */
   }
 
   &__track {
@@ -48,5 +74,13 @@
   &__artists {
     font-size: clamp(1rem, 3vw, 2rem);
     opacity: 0.8;
+  }
+
+  /* Active/Idle states if needed */
+  &--active {
+    /* styling for active state */
+  }
+  &--idle {
+    /* styling for idle state */
   }
 }
