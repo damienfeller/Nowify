@@ -1,52 +1,41 @@
 .now-playing {
-  /* fill the screen in its new orientation */
-  width: 100vw;
-  height: 100vh;
-  /* to ensure no extra scrollbars, remove margins/padding if needed */
+  display: flex;              // place .__cover and .__details side by side
+  flex-flow: row nowrap;
+  height: 100vh;              // fill the entire viewport height
+  width: 100vw;               // fill the entire viewport width
   margin: 0;
   padding: 0;
-
-  /* rotate 90deg anti-clockwise around (top-left) by default */
-  transform: rotate(-90deg);
-  transform-origin: top left;
-
-  /* Use the vibrant color from your code's palette */
-  background-color: var(--colour-background-now-playing);
-
-  display: flex;
-  flex-direction: row;
-  /* etc... */
+  background-color: black;    // fallback background if needed
 
   &__cover {
-    /* If you want the cover to take half the “rotated” screen */
-    flex: 1;
+    flex: 1;                  // take up half (or however much) of the container
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center;      // center image vertically
+    justify-content: center;  // center image horizontally
+    padding: 0;               // optional
   }
 
   &__image {
-    height: 100%;
     width: auto;
-    object-fit: cover;
-    /* or contain if you don't want cropping */
+    height: 100%;             // fill the full vertical space
+    object-fit: cover;        // or `contain` if you prefer not to crop
+    display: block;
+    box-shadow: 1px 1px 16px -2px rgba(0, 0, 0, .3);
   }
 
   &__details {
-    /* The other half for the text */
-    flex: 1;
+    flex: 1;                  // the other half of the screen
+    padding: 2rem;            // adjust as needed
+    color: rgb(240, 240, 240);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center; /* center text horizontally */
-    padding: 1rem;       /* adjust as needed */
-    color: var(--color-text-primary);
   }
 
   &__track {
     font-size: clamp(1.5rem, 5vw, 3rem);
     font-weight: var(--font-weight-heading);
-    margin-bottom: 1rem;
+    margin: 0 0 1rem 0;
   }
 
   &__artists {
@@ -54,11 +43,12 @@
     opacity: 0.8;
   }
 
-  /* active / idle states... */
+  // Active / Idle classes
   &--active {
-    /* styling if needed */
+    /* styling for active state if needed */
   }
+
   &--idle {
-    /* styling if needed */
+    /* styling for idle state if needed */
   }
 }
